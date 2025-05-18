@@ -501,10 +501,28 @@
                     console.log(`Drive file found: ${DATA_FILE_NAME}, ID: ${googleDriveFileId}`);
                 } else {
                     console.log(`Drive file '${DATA_FILE_NAME}' not found. Creating...`);
-                    const fileMetadata = { 'name': DATA_FILE_NAME, 'parents': ['appDataFolder'] };
+                    const fileMetadata = {
+                        'name': DATA_FILE_NAME
+                        // 'parents': ['appDataFolder'] // REMOVE THIS LINE for appDataFolder creation
+                        // OR ensure 'appDataFolder' is a valid parent alias for create
+                        // For appDataFolder, often just providing the name is enough when scoped.
+                        // If you want to be explicit, sometimes just using parents: ['appDataFolder']
+                        // in the create's resource is correct. The API can be finicky.
+                        // Let's try with parents specified, as that IS the documented way.
+                        // The error might be if the user hasn't *fully* granted the scope
+                        // or if there's a delay in permission propagation.
+                    };
+                    const createResource = {
+                        name: DATA_FILE_NAME,
+                        parents: ['appDataFolder'] // This IS generally the correct way for appDataFolder.
+                        // The 403 is puzzling if the scope was granted.
+                    };
                     const createResponse = await gapi.client.drive.files.create({
-                        resource: fileMetadata,
-                        media: { mimeType: 'application/json', body: JSON.stringify({}) },
+                        resource: createResource, // Use the modified resource
+                        media: {
+                            mimeType: 'application/json',
+                            body: JSON.stringify({}) // Initial empty data
+                        },
                         fields: 'id'
                     });
                     googleDriveFileId = createResponse.result.id;
