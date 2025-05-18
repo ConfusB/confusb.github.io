@@ -136,6 +136,12 @@
             font-weight: 500;
             /* font-medium */
             transition: background-color 0.15s ease-in-out;
+            cursor: pointer;
+        }
+
+        .google-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         .google-btn-sign-in {
@@ -143,7 +149,7 @@
             color: white;
         }
 
-        .google-btn-sign-in:hover {
+        .google-btn-sign-in:hover:not(:disabled) {
             background-color: #3578E5;
         }
 
@@ -152,7 +158,7 @@
             color: white;
         }
 
-        .google-btn-sign-out:hover {
+        .google-btn-sign-out:hover:not(:disabled) {
             background-color: #C23327;
         }
 
@@ -172,8 +178,7 @@
         </header>
 
         <div class="my-6 text-center">
-            <button id="googleSignInButton" onclick="testGlobalClick('Google Sign-In Button');"
-                class="google-btn google-btn-sign-in" style="visibility:hidden;">
+            <button id="googleSignInButton" class="google-btn google-btn-sign-in" style="visibility:hidden;" disabled>
                 <svg viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.19,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.19,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.19,22C17.6,22 21.54,18.33 21.54,12.81C21.54,12.09 21.47,11.61 21.35,11.1V11.1Z">
@@ -181,8 +186,8 @@
                 </svg>
                 Sign in with Google to Sync
             </button>
-            <button id="googleSignOutButton" onclick="testGlobalClick('Google Sign-Out Button');"
-                class="google-btn google-btn-sign-out ml-2" style="visibility:hidden;">
+            <button id="googleSignOutButton" class="google-btn google-btn-sign-out ml-2" style="visibility:hidden;"
+                disabled>
                 Sign Out
             </button>
             <p id="authStatus" class="text-xs text-slate-500 mt-1"></p>
@@ -203,7 +208,6 @@
                         <option value="Sodium">Sodium (mg)</option>
                     </select>
                 </div>
-
                 <div>
                     <label for="comparisonType" class="control-label">Compare:</label>
                     <select id="comparisonType" class="control-input">
@@ -212,15 +216,13 @@
                         <option value="eq">Equal to (=)</option>
                     </select>
                 </div>
-
                 <div>
                     <label for="nutrientValue" class="control-label">Value:</label>
                     <input type="number" id="nutrientValue" placeholder="e.g., 500" class="control-input">
                 </div>
-
                 <div class="flex flex-col sm:flex-row gap-2 lg:mt-0">
-                    <button id="applyNutrientFilter" onclick="testGlobalClick('Apply Filter Button');"
-                            class="filter-btn-action py-2 px-4 rounded-md text-sm font-medium w-full">Apply</button>
+                    <button id="applyNutrientFilter"
+                        class="filter-btn-action py-2 px-4 rounded-md text-sm font-medium w-full">Apply</button>
                     <button id="clearNutrientFilter"
                         class="filter-btn-clear py-2 px-4 rounded-md text-sm font-medium w-full">Clear</button>
                 </div>
@@ -239,8 +241,7 @@
             </div>
         </div>
 
-        <div id="recipeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        </div>
+        <div id="recipeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         <p id="statusMessage" class="text-center text-slate-500 mt-10 text-lg">Loading recipes...</p>
     </div>
 
@@ -252,17 +253,14 @@
                 <h2 id="viewRecipeName" class="text-3xl font-bold text-indigo-600">Recipe Name</h2>
                 <button id="closeViewModalBtn" class="text-slate-500 hover:text-slate-700 text-2xl">&times;</button>
             </div>
-
             <img id="viewImage" src="" alt="Recipe Image" class="w-full h-64 object-cover rounded-lg mb-6 hidden"
                 onerror="this.style.display='none'; this.onerror=null;">
-
             <div class="mb-4">
                 <h3 class="text-lg font-semibold text-slate-700 mb-1">Source</h3>
                 <a id="viewRecipeURL" href="#" target="_blank" rel="noopener noreferrer"
                     class="text-indigo-500 hover:underline break-all"></a>
                 <p id="noRecipeURL" class="text-slate-500 italic hidden">No URL provided.</p>
             </div>
-
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
                 <div>
                     <p class="font-semibold text-slate-700">Prep Time:</p>
@@ -277,36 +275,29 @@
                     <p id="viewServings" class="text-slate-600"></p>
                 </div>
             </div>
-
             <div class="mb-4 text-sm">
                 <p id="viewLastMade" class="text-slate-600"></p>
             </div>
             <button id="viewMadeThisBtn"
                 class="mb-6 w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md transition duration-150">I
                 Made This!</button>
-
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-slate-700 mb-2">Ingredients</h3>
                 <ul id="viewIngredients" class="list-disc list-inside text-slate-600 space-y-1"></ul>
             </div>
-
             <div class="mb-6">
                 <h3 class="text-xl font-semibold text-slate-700 mb-2">Instructions</h3>
                 <div id="viewInstructions" class="text-slate-600 whitespace-pre-wrap prose"></div>
             </div>
-
             <div id="viewNutritionSection" class="mb-6 hidden">
                 <h3 class="text-xl font-semibold text-slate-700 mb-2">Nutrition (approx.)</h3>
                 <ul id="viewNutrition" class="list-disc list-inside text-slate-600 space-y-1"></ul>
             </div>
-
             <div id="viewNotesSection" class="mb-6 hidden">
                 <h3 class="text-xl font-semibold text-slate-700 mb-2">Notes</h3>
                 <p id="viewNotes" class="text-slate-600 italic whitespace-pre-wrap"></p>
             </div>
-
-            <div class="flex justify-end mt-8">
-                <button id="closeViewModalBtnBottom"
+            <div class="flex justify-end mt-8"><button id="closeViewModalBtnBottom"
                     class="py-2 px-5 text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-100 transition duration-150">Close</button>
             </div>
         </div>
@@ -314,10 +305,10 @@
 
     <script>
         // --- Google API Configuration ---
-        const CLIENT_ID = '755819391917-titgt6on0q8puu1qv0e67jguaof4c4j2.apps.googleusercontent.com'; // <<< REPLACE THIS!
-        const API_KEY = 'YOUR_GOOGLE_API_KEY_IF_NEEDED'; // Optional, often not needed for Drive with GIS/OAuth tokens
+        const CLIENT_ID = '755819391917-titgt6on0q8puu1qv0e67jguaof4c4j2.apps.googleusercontent.com'; // YOUR CLIENT ID
+        // const API_KEY = 'YOUR_GOOGLE_API_KEY_IF_NEEDED'; // Often not needed for this specific Drive flow
         const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
-        const SCOPES = 'https://www.googleapis.com/auth/drive.appdata'; // App Data Folder scope
+        const SCOPES = 'https://www.googleapis.com/auth/drive.appdata';
 
         const DATA_FILE_NAME = 'arma_recipe_made_data.json';
         let googleDriveFileId = null;
@@ -326,6 +317,7 @@
         let gisInited = false;
 
         // DOM Elements
+        const pageSubtitle = document.getElementById('pageSubtitle');
         const recipeList = document.getElementById('recipeList');
         const searchInput = document.getElementById('searchInput');
         const statusMessage = document.getElementById('statusMessage');
@@ -334,6 +326,7 @@
         const nutrientValueInput = document.getElementById('nutrientValue');
         const applyNutrientFilterBtn = document.getElementById('applyNutrientFilter');
         const clearNutrientFilterBtn = document.getElementById('clearNutrientFilter');
+
         const viewRecipeModal = document.getElementById('viewRecipeModal');
         const closeViewModalBtn = document.getElementById('closeViewModalBtn');
         const closeViewModalBtnBottom = document.getElementById('closeViewModalBtnBottom');
@@ -351,7 +344,6 @@
         const viewNutritionSection = document.getElementById('viewNutritionSection');
         const viewNutrition = document.getElementById('viewNutrition');
         const viewLastMade = document.getElementById('viewLastMade');
-        const pageSubtitle = document.getElementById('pageSubtitle'); // For random subtitle
 
         const googleSignInButton = document.getElementById('googleSignInButton');
         const googleSignOutButton = document.getElementById('googleSignOutButton');
@@ -362,14 +354,10 @@
         let currentNutrientFilter = null;
         let madeRecipesLog = {};
         const subtitlePhrases = [
-            "Fueled by caffeine and delicious recipes.",
-            "Adventures in the art of cooking.",
-            "Your daily dose of culinary inspiration.",
-            "Exploring flavors, one recipe at a time.",
-            "Happiness is a homemade meal.",
-            "Whipping up wonders in the kitchen.",
-            "Crafting delicious memories.",
-            "Where every recipe tells a story."
+            "Fueled by caffeine and delicious recipes.", "Adventures in the art of cooking.",
+            "Your daily dose of culinary inspiration.", "Exploring flavors, one recipe at a time.",
+            "Happiness is a homemade meal.", "Whipping up wonders in the kitchen.",
+            "Crafting delicious memories.", "Where every recipe tells a story."
         ];
 
         // --- Google API Initialization ---
@@ -379,18 +367,14 @@
 
         async function initializeGapiClient() {
             try {
-                await gapi.client.init({
-                    // apiKey: API_KEY, // Often not required if discoveryDocs work or for OAuth flows
-                    discoveryDocs: DISCOVERY_DOCS,
-                });
+                await gapi.client.init({ discoveryDocs: DISCOVERY_DOCS });
                 gapiInited = true;
                 console.log("GAPI client initialized.");
                 updateAuthUiAndLoadInitialData();
             } catch (e) {
                 console.error("Error initializing GAPI client:", e);
                 authStatus.textContent = "Error initializing Google API. Sync unavailable.";
-                loadMadeRecipesLogFromLocalStorage(); // Fallback if GAPI fails
-                displayRecipes();
+                loadMadeRecipesLogFromLocalStorage(); displayRecipes();
             }
         }
 
@@ -399,7 +383,7 @@
                 tokenClient = google.accounts.oauth2.initTokenClient({
                     client_id: CLIENT_ID,
                     scope: SCOPES,
-                    callback: gisTokenResponseCallback, // Will be called with the token response
+                    callback: gisTokenResponseCallback,
                 });
                 gisInited = true;
                 console.log("GIS initialized.");
@@ -407,29 +391,40 @@
             } catch (e) {
                 console.error("Error initializing GIS client:", e);
                 authStatus.textContent = "Error initializing Google Sign-In. Sync unavailable.";
-                loadMadeRecipesLogFromLocalStorage(); // Fallback if GIS fails
-                displayRecipes();
+                loadMadeRecipesLogFromLocalStorage(); displayRecipes();
             }
         }
 
         function updateAuthUiAndLoadInitialData() {
-            console.log("updateAuthUiAndLoadInitialData called. gapiInited:", gapiInited, "gisInited:", gisInited); // <<<< ADD THIS
+            console.log("updateAuthUiAndLoadInitialData called. gapiInited:", gapiInited, "gisInited:", gisInited);
             if (gapiInited && gisInited) {
                 googleSignInButton.style.visibility = 'visible';
                 googleSignInButton.disabled = false;
 
-                const token = gapi.client.getToken(); // Check if a token is already available (e.g., from previous session)
+                // Programmatically add event listeners for Google Auth buttons to ensure they're set once
+                if (!googleSignInButton.dataset.listenerAttached) {
+                    googleSignInButton.addEventListener('click', handleAuthClick);
+                    googleSignInButton.dataset.listenerAttached = 'true';
+                }
+                if (!googleSignOutButton.dataset.listenerAttached) {
+                    googleSignOutButton.addEventListener('click', handleSignoutClick);
+                    googleSignOutButton.dataset.listenerAttached = 'true';
+                }
+
+
+                const token = gapi.client.getToken();
+                console.log("Current token in updateAuthUi:", token);
                 if (token && token.access_token) {
-                    console.log("Already signed in from previous session.");
                     googleSignInButton.innerText = 'Refresh Sync / Signed In';
                     googleSignOutButton.style.visibility = 'visible';
-                    authStatus.textContent = 'Signed in to Google. Attempting to sync...';
+                    googleSignOutButton.disabled = false;
+                    authStatus.textContent = 'Signed in. Syncing with Google Drive...';
                     findOrCreateDataFile().then(() => loadMasterMadeRecipesLog());
                 } else {
                     googleSignInButton.innerText = 'Sign in with Google to Sync';
                     googleSignOutButton.style.visibility = 'hidden';
-                    authStatus.textContent = 'Sign in to sync "Made" data across devices.';
-                    // Load local data while waiting for potential sign-in
+                    googleSignOutButton.disabled = true;
+                    authStatus.textContent = 'Sign in to sync "Made" data.';
                     loadMadeRecipesLogFromLocalStorage();
                     displayRecipes();
                 }
@@ -437,45 +432,39 @@
         }
 
         async function gisTokenResponseCallback(tokenResponse) {
+            console.log("GIS Token Response Callback FIRED! Response:", tokenResponse);
             if (tokenResponse.error) {
                 console.error('Error from GIS token response:', tokenResponse.error);
                 authStatus.textContent = `Sign-in error. Sync uses local storage.`;
-                gapi.client.setToken(null); // Ensure any old token is cleared from gapi
+                gapi.client.setToken(null);
+                updateAuthUiAndLoadInitialData();
                 loadMadeRecipesLogFromLocalStorage();
                 displayRecipes();
-                updateAuthUiAndLoadInitialData(); // Update button states
                 return;
             }
-            // GIS automatically makes the token available to gapi.client
-            // No need for gapi.client.setToken(tokenResponse) explicitly
-            console.log('Access Token Acquired via GIS.');
             authStatus.textContent = 'Signed in successfully. Syncing data...';
-            updateAuthUiAndLoadInitialData(); // Reflect signed-in state
+            updateAuthUiAndLoadInitialData();
             await findOrCreateDataFile();
-            await loadMasterMadeRecipesLog(); // This will now attempt to load from Drive
+            await loadMasterMadeRecipesLog();
         }
-
-        function testGlobalClick(message) {
-                console.log("Global testGlobalClick called with message:", message);
-                alert("Global click test successful: " + message);
-       }
 
         // --- Authentication Handlers ---
         function handleAuthClick() {
-             console.log("handleAuthClick called!"); // <<<< ADD THIS
+            console.log("handleAuthClick called!");
             if (!tokenClient) {
-                console.error("Token client not initialized.");
+                console.error("Token client not initialized in handleAuthClick.");
                 authStatus.textContent = "Google Sign-In not ready. Please wait or refresh.";
                 return;
             }
-            if (gapi.client.getToken() === null) { // If not signed in, request access
+            if (gapi.client.getToken() === null) {
                 tokenClient.requestAccessToken({ prompt: 'consent' });
-            } else { // If already signed in (token exists), just refresh or re-attempt process
-                tokenClient.requestAccessToken({ prompt: '' }); // Will use existing grant
+            } else {
+                tokenClient.requestAccessToken({ prompt: '' });
             }
         }
 
         function handleSignoutClick() {
+            console.log("handleSignoutClick called!");
             const token = gapi.client.getToken();
             if (token !== null) {
                 google.accounts.oauth2.revoke(token.access_token, () => {
@@ -493,10 +482,13 @@
 
         // --- Google Drive API Functions ---
         async function findOrCreateDataFile() {
-            if (!gapi.client.getToken() || !gapi.client.getToken().access_token) {
-                console.log("Not authenticated with Google. Skipping Drive file check.");
+            const currentToken = gapi.client.getToken();
+            if (!currentToken || !currentToken.access_token) {
+                console.log("Not authenticated with Google (no token). Skipping Drive file check.");
+                authStatus.textContent = "Not signed in. Please sign in to sync.";
                 return;
             }
+            console.log("findOrCreateDataFile: Authenticated. Proceeding with Drive operations.");
             authStatus.textContent = 'Checking Google Drive file...';
             try {
                 const response = await gapi.client.drive.files.list({
@@ -564,7 +556,7 @@
                     path: `/upload/drive/v3/files/${googleDriveFileId}`,
                     method: 'PATCH',
                     params: { uploadType: 'media' },
-                    headers: { 'Content-Type': 'application/json' }, // Important for media upload
+                    headers: { 'Content-Type': 'application/json' },
                     body: content
                 });
                 console.log("Data saved to Google Drive successfully.");
@@ -632,9 +624,6 @@
                     console.error('recipes.json did not contain a valid JSON array.');
                     throw new Error('Recipe data is not a valid array.');
                 }
-                // After recipes are loaded, try to load user's "made" data (which might try Drive)
-                // This is now handled by updateAuthUiAndLoadInitialData and auth callbacks
-                // For now, just display with whatever madeRecipesLog is currently set to
                 displayRecipes();
             } catch (error) {
                 console.error("Error loading recipes.json:", error);
@@ -687,17 +676,20 @@
                 });
             }
 
-            statusMessage.classList.toggle('hidden', recipesToDisplay.length > 0 || allRecipes.length === 0 && statusMessage.textContent.startsWith("Error"));
-            if (recipesToDisplay.length === 0 && allRecipes.length > 0) { // Only show "no recipes found" if recipes were actually loaded
+            const initialLoadError = statusMessage.textContent.startsWith("Error loading recipes");
+            statusMessage.classList.toggle('hidden', recipesToDisplay.length > 0 || initialLoadError);
+
+            if (recipesToDisplay.length === 0 && !initialLoadError && allRecipes.length > 0) {
                 let msg = "No recipes found.";
                 if (currentNutrientFilter && searchTerm) msg = `No recipes match "${searchTerm}" with the current nutrition filter.`;
                 else if (currentNutrientFilter) msg = `No recipes match the current nutrition filter.`;
                 else if (searchTerm) msg = `No recipes found for "${searchTerm}".`;
                 statusMessage.textContent = msg;
             } else if (recipesToDisplay.length > 0) {
-                statusMessage.textContent = ''; // Clear if recipes are shown
+                statusMessage.textContent = '';
+            } else if (allRecipes.length === 0 && !initialLoadError) {
+                statusMessage.textContent = 'No recipes loaded. Check recipes.json.';
             }
-
 
             recipesToDisplay.forEach(recipe => {
                 const card = createRecipeCard(recipe);
@@ -752,6 +744,17 @@
                 markRecipeAsMade(recipe.id);
             });
             return card;
+        }
+
+        function displayMadeInfoInModal(recipeId) {
+            if (!viewLastMade) return;
+            const logEntry = madeRecipesLog[recipeId];
+            if (logEntry) {
+                const lastMadeDate = new Date(logEntry.lastMade).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                viewLastMade.textContent = `You've made this ${logEntry.count} time(s). Last made on ${lastMadeDate}.`;
+            } else {
+                viewLastMade.textContent = "You haven't marked this as made yet.";
+            }
         }
 
         function openViewModal(recipeId) {
@@ -818,10 +821,9 @@
                 viewNotesSection.classList.add('hidden');
             }
 
-            displayMadeInfoInModal(recipeId); // Update "made" info in modal
+            displayMadeInfoInModal(recipeId);
 
             const viewMadeThisBtn = document.getElementById('viewMadeThisBtn');
-            // Clone and replace to ensure only one listener, or manage listeners more carefully
             const newViewMadeThisBtn = viewMadeThisBtn.cloneNode(true);
             viewMadeThisBtn.parentNode.replaceChild(newViewMadeThisBtn, viewMadeThisBtn);
             newViewMadeThisBtn.addEventListener('click', () => {
@@ -831,40 +833,60 @@
             viewRecipeModal.classList.add('active');
         }
 
-        // --- Event Listeners ---
-        searchInput.addEventListener('input', displayRecipes);
-        applyNutrientFilterBtn.addEventListener('click', () => {
-            const nutrient = nutrientSelect.value;
-            const type = comparisonType.value;
-            const value = parseFloat(nutrientValueInput.value);
-
-            if (nutrient && !isNaN(value)) {
-                currentNutrientFilter = { nutrient, type, value };
-            } else if (nutrient && isNaN(value)) {
-                alert("Please enter a valid number for the nutrient value.");
+        function markRecipeAsMade(recipeId) {
+            console.log(`Marking recipe ${recipeId} as made.`);
+            const now = new Date().toISOString();
+            if (madeRecipesLog[recipeId]) {
+                madeRecipesLog[recipeId].lastMade = now;
+                madeRecipesLog[recipeId].count = (madeRecipesLog[recipeId].count || 0) + 1;
             } else {
-                currentNutrientFilter = null;
+                madeRecipesLog[recipeId] = { lastMade: now, count: 1 };
             }
-            displayRecipes();
-        });
-        clearNutrientFilterBtn.addEventListener('click', () => {
-            currentNutrientFilter = null;
-            nutrientSelect.value = "";
-            nutrientValueInput.value = "";
-            searchInput.value = ""; // Also clear search input on full clear
-            displayRecipes();
-        });
 
-        closeViewModalBtn.addEventListener('click', () => viewRecipeModal.classList.remove('active'));
-        closeViewModalBtnBottom.addEventListener('click', () => viewRecipeModal.classList.remove('active'));
+            saveMasterMadeRecipesLog();
 
+            updateMadeStatusDisplayOnCard(recipeId);
+            if (viewRecipeModal.classList.contains('active') && viewRecipeModal.dataset.recipeId === recipeId) {
+                displayMadeInfoInModal(recipeId);
+            }
+        }
+
+        // Event Listeners attached once DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             setRandomSubtitle();
-            googleSignInButton.disabled = true; // Keep disabled until GAPI/GIS loads
+            googleSignInButton.disabled = true; // Start disabled
 
-            loadMadeRecipesLogFromLocalStorage(); // Load local data first
-            loadRecipesAndDisplay(); // Initial display based on local data & recipes.json
-            // gapiLoaded() and gisLoaded() will call updateAuthUiAndLoadInitialData()
+            // Filter and search listeners
+            searchInput.addEventListener('input', displayRecipes);
+            applyNutrientFilterBtn.addEventListener('click', () => {
+                const nutrient = nutrientSelect.value;
+                const type = comparisonType.value;
+                const value = parseFloat(nutrientValueInput.value);
+                if (nutrient && !isNaN(value)) {
+                    currentNutrientFilter = { nutrient, type, value };
+                } else if (nutrient && isNaN(value)) {
+                    alert("Please enter a valid number for the nutrient value.");
+                } else {
+                    currentNutrientFilter = null;
+                }
+                displayRecipes();
+            });
+            clearNutrientFilterBtn.addEventListener('click', () => {
+                currentNutrientFilter = null;
+                nutrientSelect.value = "";
+                nutrientValueInput.value = "";
+                searchInput.value = "";
+                displayRecipes();
+            });
+
+            // Modal close listeners
+            closeViewModalBtn.addEventListener('click', () => viewRecipeModal.classList.remove('active'));
+            closeViewModalBtnBottom.addEventListener('click', () => viewRecipeModal.classList.remove('active'));
+
+            // Initial data load sequence
+            loadMadeRecipesLogFromLocalStorage();
+            loadRecipesAndDisplay();
+            // GAPI/GIS loading is handled by their onload callbacks which then call updateAuthUiAndLoadInitialData
         });
     </script>
 </body>
