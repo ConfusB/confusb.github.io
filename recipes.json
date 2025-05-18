@@ -89,5 +89,47 @@
       "Calcium: 154 mg",
       "Iron: 2 mg"
     ]
+  },
+  {
+    "id": "recipe-1747564120802",
+    "url": "https://littlesunnykitchen.com/chicken-tenders/",
+    "name": "Garlic Butter Chicken Tenders",
+    "prepTime": "N/A",
+    "cookTime": "15mins",
+    "servings": "3",
+    "ingredients": [
+      "1 tablespoon olive oil",
+      "2 tablespoon butter divided",
+      "1 pound 450g chicken tenderloins (chicken mini fillets",
+      "2 teaspoons paprika",
+      "½ teaspoon salt",
+      "¼ teaspoon ground black pepper",
+      "4 cloves garlic minced or crushed",
+      "1 teaspoon Italian seasoning",
+      "1 tablespoon chopped fresh parsley chopped – for garnish"
+    ],
+    "instructions": "1. Add olive oil and melt 1 tablespoon of butter in a pan/skillet over medium heat.\n2. Add the chicken tenders, season with paprika, salt, and pepper.\n3. Cook for 3 minutes on each side (season each side as you cook).\n4. Make room for the garlic, melt the remaining butter, and add the garlic. Cook for 30 seconds or until the garlic becomes fragrant.\n5. Season with Italian seasoning, and cook for one more minute.\n6. Add 2 tablespoons of water to the pan to deglaze it, and scrape off any bits stuck to the bottom of the pan (that’s where all of the good flavor is).\n7. Garnish with chopped fresh parsley or basil leaves, and serve warm.",
+    "imageUrl": "https://littlesunnykitchen.com/wp-content/uploads/2021/01/Garlic-Butter-Chicken-Tenders-8.jpg",
+    "notes": "",
+    "nutrition": [
+      "Serving: 5 ounces",
+      "Calories: 293 kcal",
+      "Carbohydrates: 3 g",
+      "Protein: 33 g",
+      "Fat: 16 g",
+      "Saturated Fat: 6 g",
+      "Polyunsaturated Fat: 2 g",
+      "Monounsaturated Fat: 7 g",
+      "Trans Fat: 0.3 g",
+      "Cholesterol: 117 mg",
+      "Sodium: 567 mg",
+      "Potassium: 626 mg",
+      "Fiber: 1 g",
+      "Sugar: 0.2 g",
+      "Vitamin A: 1060 IU",
+      "Vitamin C: 5 mg",
+      "Calcium: 34 mg",
+      "Iron: 1 mg"
+    ]
   }
 ]
