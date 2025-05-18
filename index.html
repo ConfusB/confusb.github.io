@@ -14,8 +14,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            /* Tailwind gray-100 */
+            background-color: #f3f4f6; /* Tailwind gray-100 */
         }
 
         .modal {
@@ -73,23 +72,17 @@
 
         .control-label {
             display: block;
-            font-size: 0.875rem;
-            /* text-sm */
-            font-weight: 500;
-            /* font-medium */
-            color: #334155;
-            /* text-slate-700 */
-            margin-bottom: 0.25rem;
-            /* mb-1 */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            color: #334155; /* text-slate-700 */
+            margin-bottom: 0.25rem; /* mb-1 */
         }
 
         .control-input {
             width: 100%;
             padding: 0.5rem 0.75rem;
-            border: 1px solid #cbd5e1;
-            /* slate-300 */
-            border-radius: 0.375rem;
-            /* rounded-md */
+            border: 1px solid #cbd5e1; /* slate-300 */
+            border-radius: 0.375rem; /* rounded-md */
             box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         }
@@ -97,71 +90,53 @@
         .control-input:focus {
             outline: 2px solid transparent;
             outline-offset: 2px;
-            border-color: #6366f1;
-            /* indigo-500 */
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
-            /* ring-indigo-500/25 */
+            border-color: #6366f1; /* indigo-500 */
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25); /* ring-indigo-500/25 */
         }
 
         .filter-btn-action {
-            background-color: #4f46e5;
-            /* indigo-600 */
+            background-color: #4f46e5; /* indigo-600 */
             color: white;
         }
 
         .filter-btn-action:hover {
-            background-color: #4338ca;
-            /* indigo-700 */
+            background-color: #4338ca; /* indigo-700 */
         }
 
         .filter-btn-clear {
-            background-color: #e5e7eb;
-            /* gray-200 */
-            color: #374151;
-            /* gray-700 */
+            background-color: #e5e7eb; /* gray-200 */
+            color: #374151; /* gray-700 */
         }
 
         .filter-btn-clear:hover {
-            background-color: #d1d5db;
-            /* gray-300 */
+            background-color: #d1d5db; /* gray-300 */
         }
-
         .google-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            /* rounded-md */
-            font-weight: 500;
-            /* font-medium */
+            border-radius: 0.375rem; /* rounded-md */
+            font-weight: 500; /* font-medium */
             transition: background-color 0.15s ease-in-out;
             cursor: pointer;
         }
-
         .google-btn:disabled {
             opacity: 0.7;
             cursor: not-allowed;
         }
-
         .google-btn-sign-in {
-            background-color: #4285F4;
-            color: white;
+            background-color: #4285F4; color: white;
         }
-
         .google-btn-sign-in:hover:not(:disabled) {
             background-color: #3578E5;
         }
-
         .google-btn-sign-out {
-            background-color: #DB4437;
-            color: white;
+            background-color: #DB4437; color: white;
         }
-
         .google-btn-sign-out:hover:not(:disabled) {
             background-color: #C23327;
         }
-
         .google-btn svg {
             margin-right: 0.5rem;
             width: 18px;
@@ -179,15 +154,10 @@
 
         <div class="my-6 text-center">
             <button id="googleSignInButton" class="google-btn google-btn-sign-in" style="visibility:hidden;" disabled>
-                <svg viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                        d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.19,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.19,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.19,22C17.6,22 21.54,18.33 21.54,12.81C21.54,12.09 21.47,11.61 21.35,11.1V11.1Z">
-                    </path>
-                </svg>
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.19,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.19,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.19,22C17.6,22 21.54,18.33 21.54,12.81C21.54,12.09 21.47,11.61 21.35,11.1V11.1Z"></path></svg>
                 Sign in with Google to Sync
             </button>
-            <button id="googleSignOutButton" class="google-btn google-btn-sign-out ml-2" style="visibility:hidden;"
-                disabled>
+            <button id="googleSignOutButton" class="google-btn google-btn-sign-out ml-2" style="visibility:hidden;" disabled>
                 Sign Out
             </button>
             <p id="authStatus" class="text-xs text-slate-500 mt-1"></p>
@@ -221,21 +191,16 @@
                     <input type="number" id="nutrientValue" placeholder="e.g., 500" class="control-input">
                 </div>
                 <div class="flex flex-col sm:flex-row gap-2 lg:mt-0">
-                    <button id="applyNutrientFilter"
-                        class="filter-btn-action py-2 px-4 rounded-md text-sm font-medium w-full">Apply</button>
-                    <button id="clearNutrientFilter"
-                        class="filter-btn-clear py-2 px-4 rounded-md text-sm font-medium w-full">Clear</button>
+                    <button id="applyNutrientFilter" class="filter-btn-action py-2 px-4 rounded-md text-sm font-medium w-full">Apply</button>
+                    <button id="clearNutrientFilter" class="filter-btn-clear py-2 px-4 rounded-md text-sm font-medium w-full">Clear</button>
                 </div>
             </div>
             <div class="mt-4">
                 <label for="searchInput" class="control-label sr-only">Search Recipes</label>
                 <div class="relative w-full">
-                    <input type="text" id="searchInput" placeholder="Search by name or ingredients..."
-                        class="control-input pl-10">
-                    <svg class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    <input type="text" id="searchInput" placeholder="Search by name or ingredients..." class="control-input pl-10">
+                    <svg class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
             </div>
@@ -245,68 +210,36 @@
         <p id="statusMessage" class="text-center text-slate-500 mt-10 text-lg">Loading recipes...</p>
     </div>
 
-    <div id="viewRecipeModal"
-        class="modal fixed inset-0 bg-gray-800 bg-opacity-75 items-center justify-center p-4 z-50">
-        <div
-            class="bg-white p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
+    <div id="viewRecipeModal" class="modal fixed inset-0 bg-gray-800 bg-opacity-75 items-center justify-center p-4 z-50">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
             <div class="flex justify-between items-start mb-4">
                 <h2 id="viewRecipeName" class="text-3xl font-bold text-indigo-600">Recipe Name</h2>
                 <button id="closeViewModalBtn" class="text-slate-500 hover:text-slate-700 text-2xl">&times;</button>
             </div>
-            <img id="viewImage" src="" alt="Recipe Image" class="w-full h-64 object-cover rounded-lg mb-6 hidden"
-                onerror="this.style.display='none'; this.onerror=null;">
+            <img id="viewImage" src="" alt="Recipe Image" class="w-full h-64 object-cover rounded-lg mb-6 hidden" onerror="this.style.display='none'; this.onerror=null;">
             <div class="mb-4">
                 <h3 class="text-lg font-semibold text-slate-700 mb-1">Source</h3>
-                <a id="viewRecipeURL" href="#" target="_blank" rel="noopener noreferrer"
-                    class="text-indigo-500 hover:underline break-all"></a>
+                <a id="viewRecipeURL" href="#" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline break-all"></a>
                 <p id="noRecipeURL" class="text-slate-500 italic hidden">No URL provided.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
-                <div>
-                    <p class="font-semibold text-slate-700">Prep Time:</p>
-                    <p id="viewPrepTime" class="text-slate-600"></p>
-                </div>
-                <div>
-                    <p class="font-semibold text-slate-700">Cook Time:</p>
-                    <p id="viewCookTime" class="text-slate-600"></p>
-                </div>
-                <div>
-                    <p class="font-semibold text-slate-700">Servings:</p>
-                    <p id="viewServings" class="text-slate-600"></p>
-                </div>
+                <div><p class="font-semibold text-slate-700">Prep Time:</p><p id="viewPrepTime" class="text-slate-600"></p></div>
+                <div><p class="font-semibold text-slate-700">Cook Time:</p><p id="viewCookTime" class="text-slate-600"></p></div>
+                <div><p class="font-semibold text-slate-700">Servings:</p><p id="viewServings" class="text-slate-600"></p></div>
             </div>
-            <div class="mb-4 text-sm">
-                <p id="viewLastMade" class="text-slate-600"></p>
-            </div>
-            <button id="viewMadeThisBtn"
-                class="mb-6 w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md transition duration-150">I
-                Made This!</button>
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold text-slate-700 mb-2">Ingredients</h3>
-                <ul id="viewIngredients" class="list-disc list-inside text-slate-600 space-y-1"></ul>
-            </div>
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold text-slate-700 mb-2">Instructions</h3>
-                <div id="viewInstructions" class="text-slate-600 whitespace-pre-wrap prose"></div>
-            </div>
-            <div id="viewNutritionSection" class="mb-6 hidden">
-                <h3 class="text-xl font-semibold text-slate-700 mb-2">Nutrition (approx.)</h3>
-                <ul id="viewNutrition" class="list-disc list-inside text-slate-600 space-y-1"></ul>
-            </div>
-            <div id="viewNotesSection" class="mb-6 hidden">
-                <h3 class="text-xl font-semibold text-slate-700 mb-2">Notes</h3>
-                <p id="viewNotes" class="text-slate-600 italic whitespace-pre-wrap"></p>
-            </div>
-            <div class="flex justify-end mt-8"><button id="closeViewModalBtnBottom"
-                    class="py-2 px-5 text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-100 transition duration-150">Close</button>
-            </div>
+            <div class="mb-4 text-sm"><p id="viewLastMade" class="text-slate-600"></p></div>
+            <button id="viewMadeThisBtn" class="mb-6 w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md transition duration-150">I Made This!</button>
+            <div class="mb-6"><h3 class="text-xl font-semibold text-slate-700 mb-2">Ingredients</h3><ul id="viewIngredients" class="list-disc list-inside text-slate-600 space-y-1"></ul></div>
+            <div class="mb-6"><h3 class="text-xl font-semibold text-slate-700 mb-2">Instructions</h3><div id="viewInstructions" class="text-slate-600 whitespace-pre-wrap prose"></div></div>
+            <div id="viewNutritionSection" class="mb-6 hidden"><h3 class="text-xl font-semibold text-slate-700 mb-2">Nutrition (approx.)</h3><ul id="viewNutrition" class="list-disc list-inside text-slate-600 space-y-1"></ul></div>
+            <div id="viewNotesSection" class="mb-6 hidden"><h3 class="text-xl font-semibold text-slate-700 mb-2">Notes</h3><p id="viewNotes" class="text-slate-600 italic whitespace-pre-wrap"></p></div>
+            <div class="flex justify-end mt-8"><button id="closeViewModalBtnBottom" class="py-2 px-5 text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-100 transition duration-150">Close</button></div>
         </div>
     </div>
 
     <script>
         // --- Google API Configuration ---
-        const CLIENT_ID = '755819391917-titgt6on0q8puu1qv0e67jguaof4c4j2.apps.googleusercontent.com'; // YOUR CLIENT ID
-        // const API_KEY = 'YOUR_GOOGLE_API_KEY_IF_NEEDED'; 
+        const CLIENT_ID = '755819391917-titgt6on0q8puu1qv0e67jguaof4c4j2.apps.googleusercontent.com'; // Your actual Client ID
         const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
         const SCOPES = 'https://www.googleapis.com/auth/drive.appdata';
 
@@ -326,7 +259,7 @@
         const nutrientValueInput = document.getElementById('nutrientValue');
         const applyNutrientFilterBtn = document.getElementById('applyNutrientFilter');
         const clearNutrientFilterBtn = document.getElementById('clearNutrientFilter');
-
+        
         const viewRecipeModal = document.getElementById('viewRecipeModal');
         const closeViewModalBtn = document.getElementById('closeViewModalBtn');
         const closeViewModalBtnBottom = document.getElementById('closeViewModalBtnBottom');
@@ -344,7 +277,7 @@
         const viewNutritionSection = document.getElementById('viewNutritionSection');
         const viewNutrition = document.getElementById('viewNutrition');
         const viewLastMade = document.getElementById('viewLastMade');
-
+        
         const googleSignInButton = document.getElementById('googleSignInButton');
         const googleSignOutButton = document.getElementById('googleSignOutButton');
         const authStatus = document.getElementById('authStatus');
@@ -383,7 +316,7 @@
                 tokenClient = google.accounts.oauth2.initTokenClient({
                     client_id: CLIENT_ID,
                     scope: SCOPES,
-                    callback: gisTokenResponseCallback,
+                    callback: gisTokenResponseCallback, // This will be called with the token response
                 });
                 gisInited = true;
                 console.log("GIS initialized.");
@@ -394,13 +327,13 @@
                 loadMadeRecipesLogFromLocalStorage(); displayRecipes();
             }
         }
-
+        
         function updateAuthUiAndLoadInitialData() {
             console.log("updateAuthUiAndLoadInitialData called. gapiInited:", gapiInited, "gisInited:", gisInited);
             if (gapiInited && gisInited) {
                 googleSignInButton.style.visibility = 'visible';
                 googleSignInButton.disabled = false;
-
+                
                 if (!googleSignInButton.dataset.listenerAttached) {
                     googleSignInButton.addEventListener('click', handleAuthClick);
                     googleSignInButton.dataset.listenerAttached = 'true';
@@ -424,7 +357,7 @@
                     googleSignOutButton.disabled = true;
                     authStatus.textContent = 'Sign in to sync "Made" data.';
                     loadMadeRecipesLogFromLocalStorage();
-                    displayRecipes();
+                    displayRecipes(); 
                 }
             }
         }
@@ -433,17 +366,18 @@
             console.log("GIS Token Response Callback FIRED! Response:", tokenResponse);
             if (tokenResponse.error) {
                 console.error('Error from GIS token response:', tokenResponse.error);
-                authStatus.textContent = `Sign-in error. Sync uses local storage.`;
-                gapi.client.setToken(null);
-                updateAuthUiAndLoadInitialData();
-                loadMadeRecipesLogFromLocalStorage();
+                authStatus.textContent = `Sign-in error: ${tokenResponse.error || 'Unknown error'}. Sync uses local storage.`;
+                gapi.client.setToken(null); // Explicitly clear token from GAPI client
+                updateAuthUiAndLoadInitialData(); 
+                loadMadeRecipesLogFromLocalStorage(); // Fallback
                 displayRecipes();
                 return;
             }
+            // GIS should automatically set the token for gapi.client
             authStatus.textContent = 'Signed in successfully. Syncing data...';
-            updateAuthUiAndLoadInitialData();
+            updateAuthUiAndLoadInitialData(); // Update UI based on new token state
             await findOrCreateDataFile();
-            await loadMasterMadeRecipesLog();
+            await loadMasterMadeRecipesLog(); 
         }
 
         // --- Authentication Handlers ---
@@ -454,10 +388,10 @@
                 authStatus.textContent = "Google Sign-In not ready. Please wait or refresh.";
                 return;
             }
-            if (gapi.client.getToken() === null) {
-                tokenClient.requestAccessToken({ prompt: 'consent' });
-            } else {
-                tokenClient.requestAccessToken({ prompt: '' });
+            if (gapi.client.getToken() === null) { // If not signed in, request access
+                tokenClient.requestAccessToken({prompt: 'consent'});
+            } else { // If already signed in (token exists), refresh token or re-initiate process
+                tokenClient.requestAccessToken({prompt: ''}); // Attempts to get token without consent if already granted
             }
         }
 
@@ -466,31 +400,31 @@
             const token = gapi.client.getToken();
             if (token !== null) {
                 google.accounts.oauth2.revoke(token.access_token, () => {
-                    gapi.client.setToken('');
+                    gapi.client.setToken(''); 
                     googleDriveFileId = null;
                     authStatus.textContent = 'Signed out. Sync uses local storage.';
                     console.log('Signed out from Google.');
-                    madeRecipesLog = {};
-                    loadMadeRecipesLogFromLocalStorage();
-                    displayRecipes();
-                    updateAuthUiAndLoadInitialData();
+                    madeRecipesLog = {};      
+                    loadMadeRecipesLogFromLocalStorage(); 
+                    displayRecipes();         
+                    updateAuthUiAndLoadInitialData(); 
                 });
             }
         }
-
+        
         // --- Google Drive API Functions ---
         async function findOrCreateDataFile() {
             const currentToken = gapi.client.getToken();
             if (!currentToken || !currentToken.access_token) {
-                console.log("Not authenticated with Google (no token). Skipping Drive file check.");
-                authStatus.textContent = "Not signed in. Please sign in to sync.";
-                return;
+                 console.log("Not authenticated with Google (no token). Skipping Drive file check.");
+                 authStatus.textContent = "Not signed in. Please sign in to sync.";
+                 return;
             }
             console.log("findOrCreateDataFile: Authenticated. Proceeding with Drive operations.");
             authStatus.textContent = 'Checking Google Drive file...';
             try {
                 const response = await gapi.client.drive.files.list({
-                    spaces: 'appDataFolder',
+                    spaces: 'appDataFolder', 
                     fields: 'files(id, name)',
                     q: `name='${DATA_FILE_NAME}' and trashed=false`
                 });
@@ -499,19 +433,19 @@
                     console.log(`Drive file found: ${DATA_FILE_NAME}, ID: ${googleDriveFileId}`);
                 } else {
                     console.log(`Drive file '${DATA_FILE_NAME}' not found. Creating...`);
-                    // For appDataFolder, just providing the name is often enough when the scope is drive.appdata
+                    // For appDataFolder, just providing the name is enough when the scope is drive.appdata
+                    // No 'parents' needed in the resource for appDataFolder creation.
                     const fileMetadataForCreate = {
                         'name': DATA_FILE_NAME
-                        // If 'parents' is needed, it should be ['appDataFolder'], but sometimes it's implicit.
-                        // Let's try without 'parents' first for appDataFolder creation.
                     };
                     const createResponse = await gapi.client.drive.files.create({
-                        resource: fileMetadataForCreate,
+                        resource: fileMetadataForCreate, 
                         media: {
                             mimeType: 'application/json',
-                            body: JSON.stringify({})
+                            body: JSON.stringify({}) 
                         },
                         fields: 'id'
+                        // 'parents' is not specified here, file goes into appDataFolder by default with the scope
                     });
                     googleDriveFileId = createResponse.result.id;
                     console.log(`Drive file created with ID: ${googleDriveFileId}`);
@@ -586,7 +520,7 @@
             localStorage.setItem('armaMadeRecipesLog', JSON.stringify(madeRecipesLog));
             console.log("Data saved to localStorage.");
         }
-
+        
         async function loadMasterMadeRecipesLog() {
             let loadedFromDrive = false;
             if (gapi.client.getToken() && gapi.client.getToken().access_token && googleDriveFileId) {
@@ -606,7 +540,7 @@
             // Always save to local storage as a backup or primary if Drive fails/not used
             saveMadeRecipesLogToLocalStorage();
         }
-
+        
         // --- Core App Logic ---
         function setRandomSubtitle() {
             if (pageSubtitle && subtitlePhrases.length > 0) {
@@ -629,12 +563,12 @@
                     console.error('recipes.json did not contain a valid JSON array.');
                     throw new Error('Recipe data is not a valid array.');
                 }
-                displayRecipes();
+                displayRecipes(); 
             } catch (error) {
                 console.error("Error loading recipes.json:", error);
                 statusMessage.textContent = `Error loading recipes: ${error.message}`;
                 statusMessage.classList.add('text-red-500');
-                allRecipes = [];
+                allRecipes = []; 
                 displayRecipes();
             }
         }
@@ -680,7 +614,7 @@
                     return nameMatch || ingredientsMatch;
                 });
             }
-
+            
             const initialLoadError = statusMessage.textContent.startsWith("Error loading recipes");
             statusMessage.classList.toggle('hidden', recipesToDisplay.length > 0 || initialLoadError);
 
@@ -691,7 +625,7 @@
                 else if (searchTerm) msg = `No recipes found for "${searchTerm}".`;
                 statusMessage.textContent = msg;
             } else if (recipesToDisplay.length > 0) {
-                statusMessage.textContent = '';
+                statusMessage.textContent = ''; 
             } else if (allRecipes.length === 0 && !initialLoadError) {
                 statusMessage.textContent = 'No recipes loaded. Check recipes.json.';
             }
@@ -710,7 +644,7 @@
             const shortIngredients = Array.isArray(recipe.ingredients) ?
                 (recipe.ingredients.slice(0, 3).join(', ') + (recipe.ingredients.length > 3 ? '...' : '')) :
                 'Not specified';
-
+            
             let nutritionSummary = '';
             if (recipe.nutrition && Array.isArray(recipe.nutrition) && recipe.nutrition.length > 0) {
                 const calorieInfo = recipe.nutrition.find(n => typeof n === 'string' && n.toLowerCase().includes('calories'));
@@ -726,7 +660,7 @@
                 madeInfoHTML += `<p>Made ${logEntry.count} time(s). Last: ${lastMadeDate}</p>`;
             }
             madeInfoHTML += `</div>`;
-
+            
             card.innerHTML = `
                 <div>
                     ${recipe.imageUrl && !recipe.imageUrl.startsWith('data:image/svg+xml') ? `<img src="${recipe.imageUrl}" alt="${recipe.name || 'Recipe Image'}" class="w-full h-40 object-cover rounded-lg mb-4" onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<div class=\\'w-full h-40 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-slate-500\\'><p>Image Error</p></div>'); this.onerror=null;">` : `<div class="w-full h-40 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-slate-500"><p>${recipe.imageUrl && recipe.imageUrl.startsWith('data:image/svg+xml') ? 'Placeholder Image' : 'No Image'}</p></div>`}
@@ -750,7 +684,7 @@
             });
             return card;
         }
-
+        
         function displayMadeInfoInModal(recipeId) {
             if (!viewLastMade) {
                 console.error("Element with ID 'viewLastMade' not found in modal for displayMadeInfoInModal.");
@@ -769,7 +703,7 @@
             const recipe = allRecipes.find(r => r.id === recipeId);
             if (!recipe) return;
 
-            viewRecipeModal.dataset.recipeId = recipeId;
+            viewRecipeModal.dataset.recipeId = recipeId; 
 
             viewRecipeName.textContent = recipe.name || 'Recipe Details';
             if (recipe.url) {
@@ -828,9 +762,9 @@
             } else {
                 viewNotesSection.classList.add('hidden');
             }
-
+            
             displayMadeInfoInModal(recipeId); // Call this to update the "made" info
-
+            
             const viewMadeThisBtn = document.getElementById('viewMadeThisBtn');
             const newViewMadeThisBtn = viewMadeThisBtn.cloneNode(true); // Clone to remove old listeners
             viewMadeThisBtn.parentNode.replaceChild(newViewMadeThisBtn, viewMadeThisBtn);
@@ -841,26 +775,26 @@
             viewRecipeModal.classList.add('active');
         }
 
-        // This function was missing/misspelled in previous error logs
+        // Ensure this function is globally accessible
         function updateMadeStatusDisplayOnCard(recipeId) {
-            console.log("Attempting to update card display for recipeId:", recipeId);
+            console.log("updateMadeStatusDisplayOnCard called for recipeId:", recipeId);
             const cardElement = document.querySelector(`.recipe-card[data-recipe-id="${recipeId}"]`);
             if (cardElement) {
                 let madeInfoEl = cardElement.querySelector('.made-info');
-                if (!madeInfoEl) {
+                if (!madeInfoEl) { 
                     madeInfoEl = document.createElement('div');
                     madeInfoEl.className = 'made-info text-xs text-green-600 mt-1';
-                    const buttonsDiv = cardElement.querySelector('.flex.flex-col.sm\\:flex-row.gap-2');
-                    if (buttonsDiv && buttonsDiv.parentNode) {
+                    const buttonsDiv = cardElement.querySelector('.flex.flex-col.sm\\:flex-row.gap-2'); 
+                    if(buttonsDiv && buttonsDiv.parentNode) {
                         buttonsDiv.parentNode.insertBefore(madeInfoEl, buttonsDiv);
-                    } else {
-                        const mainContentDiv = cardElement.children[0];
-                        if (mainContentDiv) mainContentDiv.appendChild(madeInfoEl);
+                    } else { 
+                        const mainContentDiv = cardElement.children[0]; // Assuming first child is the main content wrapper
+                        if(mainContentDiv) mainContentDiv.appendChild(madeInfoEl);
                         else cardElement.appendChild(madeInfoEl);
-                        console.warn("Could not find optimal place for .made-info, appended as fallback.");
+                        console.warn("Could not find optimal place for .made-info in card, appended as fallback.");
                     }
                 }
-
+                
                 const logEntry = madeRecipesLog[recipeId];
                 if (logEntry) {
                     const lastMadeDate = new Date(logEntry.lastMade).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -871,7 +805,7 @@
                     madeInfoEl.classList.add('hidden');
                 }
             } else {
-                console.warn("Could not find card element for recipeId:", recipeId, "to update made status.");
+                console.warn("Could not find card element for recipeId:", recipeId, "to update made status on card.");
             }
         }
 
@@ -884,21 +818,20 @@
             } else {
                 madeRecipesLog[recipeId] = { lastMade: now, count: 1 };
             }
-
-            saveMasterMadeRecipesLog(); // This will attempt Drive then fallback to LS
-
-            updateMadeStatusDisplayOnCard(recipeId); // Ensure this function is correctly defined and called
+            
+            saveMasterMadeRecipesLog(); 
+            
+            updateMadeStatusDisplayOnCard(recipeId); // This is the function that was previously undefined
             if (viewRecipeModal.classList.contains('active') && viewRecipeModal.dataset.recipeId === recipeId) {
                 displayMadeInfoInModal(recipeId);
             }
         }
-
+        
         // Event Listeners attached once DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             setRandomSubtitle();
-            googleSignInButton.disabled = true;
+            googleSignInButton.disabled = true; 
 
-            // Filter and search listeners
             searchInput.addEventListener('input', displayRecipes);
             applyNutrientFilterBtn.addEventListener('click', () => {
                 const nutrient = nutrientSelect.value;
@@ -908,7 +841,7 @@
                     currentNutrientFilter = { nutrient, type, value };
                 } else if (nutrient && isNaN(value)) {
                     alert("Please enter a valid number for the nutrient value.");
-                } else {
+                } else { 
                     currentNutrientFilter = null;
                 }
                 displayRecipes();
@@ -921,14 +854,12 @@
                 displayRecipes();
             });
 
-            // Modal close listeners
             closeViewModalBtn.addEventListener('click', () => viewRecipeModal.classList.remove('active'));
             closeViewModalBtnBottom.addEventListener('click', () => viewRecipeModal.classList.remove('active'));
-
-            loadMadeRecipesLogFromLocalStorage();
-            loadRecipesAndDisplay();
+            
+            loadMadeRecipesLogFromLocalStorage(); 
+            loadRecipesAndDisplay(); 
         });
     </script>
 </body>
-
 </html>
