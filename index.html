@@ -172,7 +172,8 @@
         </header>
 
         <div class="my-6 text-center">
-            <button id="googleSignInButton" class="google-btn google-btn-sign-in" style="visibility:hidden;">
+            <button id="googleSignInButton" onclick="testGlobalClick('Google Sign-In Button');"
+                class="google-btn google-btn-sign-in" style="visibility:hidden;">
                 <svg viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.19,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.19,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.19,22C17.6,22 21.54,18.33 21.54,12.81C21.54,12.09 21.47,11.61 21.35,11.1V11.1Z">
@@ -180,7 +181,8 @@
                 </svg>
                 Sign in with Google to Sync
             </button>
-            <button id="googleSignOutButton" class="google-btn google-btn-sign-out ml-2" style="visibility:hidden;">
+            <button id="googleSignOutButton" onclick="testGlobalClick('Google Sign-Out Button');"
+                class="google-btn google-btn-sign-out ml-2" style="visibility:hidden;">
                 Sign Out
             </button>
             <p id="authStatus" class="text-xs text-slate-500 mt-1"></p>
@@ -217,8 +219,8 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-2 lg:mt-0">
-                    <button id="applyNutrientFilter"
-                        class="filter-btn-action py-2 px-4 rounded-md text-sm font-medium w-full">Apply</button>
+                    <button id="applyNutrientFilter" onclick="testGlobalClick('Apply Filter Button');"
+                            class="filter-btn-action py-2 px-4 rounded-md text-sm font-medium w-full">Apply</button>
                     <button id="clearNutrientFilter"
                         class="filter-btn-clear py-2 px-4 rounded-md text-sm font-medium w-full">Clear</button>
                 </div>
@@ -452,6 +454,11 @@
             await findOrCreateDataFile();
             await loadMasterMadeRecipesLog(); // This will now attempt to load from Drive
         }
+
+        function testGlobalClick(message) {
+                console.log("Global testGlobalClick called with message:", message);
+                alert("Global click test successful: " + message);
+       }
 
         // --- Authentication Handlers ---
         function handleAuthClick() {
