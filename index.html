@@ -306,7 +306,7 @@
     <script>
         // --- Google API Configuration ---
         const CLIENT_ID = '755819391917-titgt6on0q8puu1qv0e67jguaof4c4j2.apps.googleusercontent.com'; // YOUR CLIENT ID
-        // const API_KEY = 'YOUR_GOOGLE_API_KEY_IF_NEEDED'; // Often not needed for this specific Drive flow
+        // const API_KEY = 'YOUR_GOOGLE_API_KEY_IF_NEEDED'; 
         const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
         const SCOPES = 'https://www.googleapis.com/auth/drive.appdata';
 
@@ -401,7 +401,6 @@
                 googleSignInButton.style.visibility = 'visible';
                 googleSignInButton.disabled = false;
 
-                // Programmatically add event listeners for Google Auth buttons to ensure they're set once
                 if (!googleSignInButton.dataset.listenerAttached) {
                     googleSignInButton.addEventListener('click', handleAuthClick);
                     googleSignInButton.dataset.listenerAttached = 'true';
@@ -410,7 +409,6 @@
                     googleSignOutButton.addEventListener('click', handleSignoutClick);
                     googleSignOutButton.dataset.listenerAttached = 'true';
                 }
-
 
                 const token = gapi.client.getToken();
                 console.log("Current token in updateAuthUi:", token);
@@ -480,41 +478,6 @@
             }
         }
 
-        // Make sure this function is defined at the global level within your script tag
-        function updateMadeStatusDisplayOnCard(recipeId) {
-            console.log("Attempting to update card display for recipeId:", recipeId); // Add log
-            const cardElement = document.querySelector(`.recipe-card[data-recipe-id="${recipeId}"]`);
-            if (cardElement) {
-                let madeInfoEl = cardElement.querySelector('.made-info');
-                if (!madeInfoEl) {
-                    madeInfoEl = document.createElement('div');
-                    madeInfoEl.className = 'made-info text-xs text-green-600 mt-1';
-                    const buttonsDiv = cardElement.querySelector('.flex.flex-col.sm\\:flex-row.gap-2');
-                    if (buttonsDiv && buttonsDiv.parentNode) {
-                        buttonsDiv.parentNode.insertBefore(madeInfoEl, buttonsDiv);
-                    } else {
-                        // Fallback: try to append to the main content div of the card
-                        const mainContentDiv = cardElement.children[0];
-                        if (mainContentDiv) mainContentDiv.appendChild(madeInfoEl);
-                        else cardElement.appendChild(madeInfoEl); // Absolute fallback
-                        console.warn("Could not find optimal place for .made-info, appended as fallback.");
-                    }
-                }
-
-                const logEntry = madeRecipesLog[recipeId];
-                if (logEntry) {
-                    const lastMadeDate = new Date(logEntry.lastMade).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-                    madeInfoEl.innerHTML = `<p>Made ${logEntry.count} time(s). Last: ${lastMadeDate}</p>`;
-                    madeInfoEl.classList.remove('hidden');
-                } else {
-                    madeInfoEl.innerHTML = '';
-                    madeInfoEl.classList.add('hidden');
-                }
-            } else {
-                console.warn("Could not find card element for recipeId:", recipeId, "to update made status.");
-            }
-        }
-
         // --- Google Drive API Functions ---
         async function findOrCreateDataFile() {
             const currentToken = gapi.client.getToken();
@@ -536,27 +499,17 @@
                     console.log(`Drive file found: ${DATA_FILE_NAME}, ID: ${googleDriveFileId}`);
                 } else {
                     console.log(`Drive file '${DATA_FILE_NAME}' not found. Creating...`);
-                    const fileMetadata = {
+                    // For appDataFolder, just providing the name is often enough when the scope is drive.appdata
+                    const fileMetadataForCreate = {
                         'name': DATA_FILE_NAME
-                        // 'parents': ['appDataFolder'] // REMOVE THIS LINE for appDataFolder creation
-                        // OR ensure 'appDataFolder' is a valid parent alias for create
-                        // For appDataFolder, often just providing the name is enough when scoped.
-                        // If you want to be explicit, sometimes just using parents: ['appDataFolder']
-                        // in the create's resource is correct. The API can be finicky.
-                        // Let's try with parents specified, as that IS the documented way.
-                        // The error might be if the user hasn't *fully* granted the scope
-                        // or if there's a delay in permission propagation.
-                    };
-                    const createResource = {
-                        name: DATA_FILE_NAME,
-                        parents: ['appDataFolder'] // This IS generally the correct way for appDataFolder.
-                        // The 403 is puzzling if the scope was granted.
+                        // If 'parents' is needed, it should be ['appDataFolder'], but sometimes it's implicit.
+                        // Let's try without 'parents' first for appDataFolder creation.
                     };
                     const createResponse = await gapi.client.drive.files.create({
-                        resource: createResource, // Use the modified resource
+                        resource: fileMetadataForCreate,
                         media: {
                             mimeType: 'application/json',
-                            body: JSON.stringify({}) // Initial empty data
+                            body: JSON.stringify({})
                         },
                         fields: 'id'
                     });
@@ -650,12 +603,11 @@
             if (gapi.client.getToken() && gapi.client.getToken().access_token && googleDriveFileId) {
                 savedToDrive = await saveMadeRecipesLogToGoogleDrive();
             }
-            if (!savedToDrive) {
-                saveMadeRecipesLogToLocalStorage();
-            }
+            // Always save to local storage as a backup or primary if Drive fails/not used
+            saveMadeRecipesLogToLocalStorage();
         }
 
-        // --- Core App Logic (existing and modified) ---
+        // --- Core App Logic ---
         function setRandomSubtitle() {
             if (pageSubtitle && subtitlePhrases.length > 0) {
                 const randomIndex = Math.floor(Math.random() * subtitlePhrases.length);
@@ -800,7 +752,10 @@
         }
 
         function displayMadeInfoInModal(recipeId) {
-            if (!viewLastMade) return;
+            if (!viewLastMade) {
+                console.error("Element with ID 'viewLastMade' not found in modal for displayMadeInfoInModal.");
+                return;
+            }
             const logEntry = madeRecipesLog[recipeId];
             if (logEntry) {
                 const lastMadeDate = new Date(logEntry.lastMade).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -874,16 +829,50 @@
                 viewNotesSection.classList.add('hidden');
             }
 
-            displayMadeInfoInModal(recipeId);
+            displayMadeInfoInModal(recipeId); // Call this to update the "made" info
 
             const viewMadeThisBtn = document.getElementById('viewMadeThisBtn');
-            const newViewMadeThisBtn = viewMadeThisBtn.cloneNode(true);
+            const newViewMadeThisBtn = viewMadeThisBtn.cloneNode(true); // Clone to remove old listeners
             viewMadeThisBtn.parentNode.replaceChild(newViewMadeThisBtn, viewMadeThisBtn);
             newViewMadeThisBtn.addEventListener('click', () => {
                 markRecipeAsMade(recipeId);
             });
 
             viewRecipeModal.classList.add('active');
+        }
+
+        // This function was missing/misspelled in previous error logs
+        function updateMadeStatusDisplayOnCard(recipeId) {
+            console.log("Attempting to update card display for recipeId:", recipeId);
+            const cardElement = document.querySelector(`.recipe-card[data-recipe-id="${recipeId}"]`);
+            if (cardElement) {
+                let madeInfoEl = cardElement.querySelector('.made-info');
+                if (!madeInfoEl) {
+                    madeInfoEl = document.createElement('div');
+                    madeInfoEl.className = 'made-info text-xs text-green-600 mt-1';
+                    const buttonsDiv = cardElement.querySelector('.flex.flex-col.sm\\:flex-row.gap-2');
+                    if (buttonsDiv && buttonsDiv.parentNode) {
+                        buttonsDiv.parentNode.insertBefore(madeInfoEl, buttonsDiv);
+                    } else {
+                        const mainContentDiv = cardElement.children[0];
+                        if (mainContentDiv) mainContentDiv.appendChild(madeInfoEl);
+                        else cardElement.appendChild(madeInfoEl);
+                        console.warn("Could not find optimal place for .made-info, appended as fallback.");
+                    }
+                }
+
+                const logEntry = madeRecipesLog[recipeId];
+                if (logEntry) {
+                    const lastMadeDate = new Date(logEntry.lastMade).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                    madeInfoEl.innerHTML = `<p>Made ${logEntry.count} time(s). Last: ${lastMadeDate}</p>`;
+                    madeInfoEl.classList.remove('hidden');
+                } else {
+                    madeInfoEl.innerHTML = '';
+                    madeInfoEl.classList.add('hidden');
+                }
+            } else {
+                console.warn("Could not find card element for recipeId:", recipeId, "to update made status.");
+            }
         }
 
         function markRecipeAsMade(recipeId) {
@@ -896,9 +885,9 @@
                 madeRecipesLog[recipeId] = { lastMade: now, count: 1 };
             }
 
-            saveMasterMadeRecipesLog();
+            saveMasterMadeRecipesLog(); // This will attempt Drive then fallback to LS
 
-            updateMadeStatusDisplayOnCard(recipeId);
+            updateMadeStatusDisplayOnCard(recipeId); // Ensure this function is correctly defined and called
             if (viewRecipeModal.classList.contains('active') && viewRecipeModal.dataset.recipeId === recipeId) {
                 displayMadeInfoInModal(recipeId);
             }
@@ -907,7 +896,7 @@
         // Event Listeners attached once DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             setRandomSubtitle();
-            googleSignInButton.disabled = true; // Start disabled
+            googleSignInButton.disabled = true;
 
             // Filter and search listeners
             searchInput.addEventListener('input', displayRecipes);
@@ -936,10 +925,8 @@
             closeViewModalBtn.addEventListener('click', () => viewRecipeModal.classList.remove('active'));
             closeViewModalBtnBottom.addEventListener('click', () => viewRecipeModal.classList.remove('active'));
 
-            // Initial data load sequence
             loadMadeRecipesLogFromLocalStorage();
             loadRecipesAndDisplay();
-            // GAPI/GIS loading is handled by their onload callbacks which then call updateAuthUiAndLoadInitialData
         });
     </script>
 </body>
