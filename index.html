@@ -480,6 +480,41 @@
             }
         }
 
+        // Make sure this function is defined at the global level within your script tag
+        function updateMadeStatusDisplayOnCard(recipeId) {
+            console.log("Attempting to update card display for recipeId:", recipeId); // Add log
+            const cardElement = document.querySelector(`.recipe-card[data-recipe-id="${recipeId}"]`);
+            if (cardElement) {
+                let madeInfoEl = cardElement.querySelector('.made-info');
+                if (!madeInfoEl) {
+                    madeInfoEl = document.createElement('div');
+                    madeInfoEl.className = 'made-info text-xs text-green-600 mt-1';
+                    const buttonsDiv = cardElement.querySelector('.flex.flex-col.sm\\:flex-row.gap-2');
+                    if (buttonsDiv && buttonsDiv.parentNode) {
+                        buttonsDiv.parentNode.insertBefore(madeInfoEl, buttonsDiv);
+                    } else {
+                        // Fallback: try to append to the main content div of the card
+                        const mainContentDiv = cardElement.children[0];
+                        if (mainContentDiv) mainContentDiv.appendChild(madeInfoEl);
+                        else cardElement.appendChild(madeInfoEl); // Absolute fallback
+                        console.warn("Could not find optimal place for .made-info, appended as fallback.");
+                    }
+                }
+
+                const logEntry = madeRecipesLog[recipeId];
+                if (logEntry) {
+                    const lastMadeDate = new Date(logEntry.lastMade).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                    madeInfoEl.innerHTML = `<p>Made ${logEntry.count} time(s). Last: ${lastMadeDate}</p>`;
+                    madeInfoEl.classList.remove('hidden');
+                } else {
+                    madeInfoEl.innerHTML = '';
+                    madeInfoEl.classList.add('hidden');
+                }
+            } else {
+                console.warn("Could not find card element for recipeId:", recipeId, "to update made status.");
+            }
+        }
+
         // --- Google Drive API Functions ---
         async function findOrCreateDataFile() {
             const currentToken = gapi.client.getToken();
