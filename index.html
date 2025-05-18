@@ -411,6 +411,7 @@
         }
 
         function updateAuthUiAndLoadInitialData() {
+            console.log("updateAuthUiAndLoadInitialData called. gapiInited:", gapiInited, "gisInited:", gisInited); // <<<< ADD THIS
             if (gapiInited && gisInited) {
                 googleSignInButton.style.visibility = 'visible';
                 googleSignInButton.disabled = false;
@@ -454,6 +455,7 @@
 
         // --- Authentication Handlers ---
         function handleAuthClick() {
+             console.log("handleAuthClick called!"); // <<<< ADD THIS
             if (!tokenClient) {
                 console.error("Token client not initialized.");
                 authStatus.textContent = "Google Sign-In not ready. Please wait or refresh.";
