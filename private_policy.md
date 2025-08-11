@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last Updated:** [Date]
+**Last Updated:** 2025-08-11
 
 **Are yoru smarter than gpt 5** ("we," "our," or "us") is developed by Confus Games. This Privacy Policy explains our practices regarding the collection, use, and disclosure of information for our mobile game application available on Google Play Store.
 
