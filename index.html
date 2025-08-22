@@ -18,10 +18,25 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
+        /* Grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(79, 172, 254, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(79, 172, 254, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
 
         body {
             font-family: 'Space Grotesk', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
             color: #fff;
             overflow-x: hidden;
@@ -35,15 +50,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.1;
+            opacity: 0.03;
             z-index: 0;
             overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.1) 0%, transparent 70%);
         }
 
         .floating-chart {
             position: absolute;
-            font-size: 4rem;
-            animation: float 20s infinite ease-in-out;
+            font-size: 3rem;
+            animation: float 25s infinite ease-in-out;
+            opacity: 0.5;
         }
 
         @keyframes float {
@@ -53,18 +70,23 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 4rem 0;
+            padding: 5rem 0;
             animation: fadeInUp 1s ease-out;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         @keyframes fadeInUp {
@@ -79,68 +101,76 @@
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, #ffd700);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            text-shadow: 0 0 40px rgba(79, 172, 254, 0.5);
+            letter-spacing: -0.02em;
         }
 
         .subtitle {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: #ffd700;
+            color: #4facfe;
             margin-bottom: 2rem;
-            font-weight: 500;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         .tagline {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            opacity: 0.8;
             margin-bottom: 3rem;
-            line-height: 1.6;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Meme Reference Box */
         .meme-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 3rem auto;
-            max-width: 800px;
-            animation: pulse 3s infinite;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 4rem auto;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.4); }
+            0%, 100% { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 25px 80px rgba(79, 172, 254, 0.2); }
         }
 
         .meme-box h2 {
-            color: #ffd700;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+            color: #4facfe;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
         }
 
         .chart-crime-example {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
-            margin: 2rem 0;
+            margin: 3rem 0;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 3rem;
         }
 
         .fake-chart {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
             font-family: 'JetBrains Mono', monospace;
             position: relative;
+            border: 1px solid rgba(79, 172, 254, 0.1);
         }
 
         .fake-chart.wrong {
@@ -148,16 +178,18 @@
         }
 
         .fake-chart.wrong::after {
-            content: "CRIME! 🚨";
+            content: "ERROR";
             position: absolute;
             top: -10px;
             right: -10px;
-            background: #ff6b6b;
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
             color: white;
-            padding: 0.3rem 0.6rem;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            animation: blink 1s infinite;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: blink 2s infinite;
         }
 
         @keyframes blink {
@@ -177,40 +209,56 @@
         }
 
         .bar-fill {
-            height: 25px;
-            background: linear-gradient(90deg, #4ecdc4, #44a3a0);
-            border-radius: 3px;
+            height: 28px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            border-radius: 5px;
             margin-left: 10px;
             position: relative;
+            box-shadow: 0 2px 10px rgba(79, 172, 254, 0.3);
         }
 
         .bar-value {
             position: absolute;
             right: -50px;
-            color: #ffd700;
+            color: #00f2fe;
             font-weight: bold;
         }
 
         /* Features Grid */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin: 4rem 0;
+            margin: 4rem auto;
+            max-width: 1200px;
+        }
+        
+        @media (max-width: 1024px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(79, 172, 254, 0.2);
             transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(79, 172, 254, 0.2);
+            border-color: rgba(79, 172, 254, 0.4);
         }
 
         .feature-icon {
@@ -219,9 +267,10 @@
         }
 
         .feature-title {
-            font-size: 1.3rem;
-            color: #ffd700;
-            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            color: #4facfe;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
         }
 
         /* CTA Buttons */
@@ -234,28 +283,33 @@
         }
 
         .btn {
-            padding: 1rem 2.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 500;
             border: none;
-            border-radius: 50px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            color: #333;
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.6);
         }
 
         .btn-secondary {
@@ -272,10 +326,11 @@
         /* Stats Section */
         .stats {
             display: flex;
-            justify-content: space-around;
-            margin: 4rem 0;
+            justify-content: center;
+            margin: 5rem auto;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 4rem;
+            max-width: 800px;
         }
 
         .stat {
@@ -283,10 +338,11 @@
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            color: #ffd700;
+            color: #00f2fe;
             font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
         }
 
         .stat-label {
@@ -303,9 +359,14 @@
         }
 
         .footer a {
-            color: #ffd700;
+            color: #4facfe;
             text-decoration: none;
             margin: 0 1rem;
+            transition: color 0.3s;
+        }
+        
+        .footer a:hover {
+            color: #00f2fe;
         }
 
         .footer a:hover {
@@ -364,39 +425,39 @@
     <!-- Animated Background -->
     <div class="bg-charts">
         <div class="floating-chart" style="top: 10%; left: 10%; animation-delay: 0s;">📊</div>
-        <div class="floating-chart" style="top: 20%; left: 80%; animation-delay: 2s;">📈</div>
-        <div class="floating-chart" style="top: 60%; left: 15%; animation-delay: 4s;">📉</div>
-        <div class="floating-chart" style="top: 70%; left: 70%; animation-delay: 6s;">🎯</div>
-        <div class="floating-chart" style="top: 40%; left: 45%; animation-delay: 8s;">📋</div>
+        <div class="floating-chart" style="top: 20%; left: 80%; animation-delay: 3s;">📈</div>
+        <div class="floating-chart" style="top: 60%; left: 15%; animation-delay: 6s;">📉</div>
+        <div class="floating-chart" style="top: 70%; left: 70%; animation-delay: 9s;">📊</div>
+        <div class="floating-chart" style="top: 40%; left: 45%; animation-delay: 12s;">📈</div>
     </div>
 
     <div class="container">
         <!-- Hero Section -->
         <div class="hero">
-            <h1>Chart Detective 🔍</h1>
-            <p class="subtitle">Spot the GPT-5 Style Data Crimes!</p>
+            <h1>Chart Detective</h1>
+            <p class="subtitle">Master the Art of Data Visualization</p>
             <p class="tagline">
-                Remember that legendary AI presentation where the charts didn't quite... chart?<br>
-                Now it's your turn to catch these visual villains red-handed! 🚨
+                Inspired by the legendary GPT-5 presentation mishap.<br>
+                Train your eye to spot when data visualization goes wrong.
             </p>
 
             <!-- CTA Buttons -->
             <div class="cta-buttons">
                 <a href="https://play.google.com/store/apps/details?id=com.confusb.chart.detective" class="btn btn-primary">
-                    <span>🎮</span> Play on Android
+                    Play Now
                 </a>
                 <a href="#features" class="btn btn-secondary">
-                    <span>📖</span> Learn More
+                    Learn More
                 </a>
             </div>
         </div>
 
         <!-- Meme Reference -->
         <div class="meme-box">
-            <h2>🤖 The Infamous Chart Crime</h2>
-            <p style="margin-bottom: 1.5rem;">
-                When GPT-5 was announced, the presentation had charts where 52.8% looked like 85%. 
-                We turned this hilarious fail into a game! Can you spot the difference?
+            <h2>The Infamous GPT-5 Chart Crime</h2>
+            <p style="margin-bottom: 2rem; line-height: 1.8; opacity: 0.9;">
+                When GPT-5 was announced, the presentation featured a chart where 52.8% appeared as 85% of the bar height. 
+                This iconic visualization error became an instant meme and inspired this educational game.
             </p>
             
             <div class="chart-crime-example">
@@ -443,9 +504,10 @@
                 </div>
             </div>
             
-            <p style="text-align: center; opacity: 0.8; font-size: 0.9rem;">
-                👈 Correct Chart | Crime Scene 👉
-            </p>
+            <div style="display: flex; justify-content: center; gap: 4rem; margin-top: 2rem;">
+                <p style="opacity: 0.7; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Accurate</p>
+                <p style="opacity: 0.7; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Corrupted</p>
+            </div>
         </div>
 
         <!-- Features Grid -->
@@ -453,7 +515,7 @@
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
                 <h3 class="feature-title">Fast-Paced Action</h3>
-                <p>10-20 seconds per round. Quick decisions, no time for spreadsheets!</p>
+                <p>10-20 seconds per round. Quick decisions test your analytical skills.</p>
             </div>
 
             <div class="feature-card">
@@ -481,9 +543,9 @@
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3 class="feature-title">Mobile First</h3>
-                <p>Designed for phones. Play anywhere, catch crimes everywhere!</p>
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">Visual Learning</h3>
+                <p>Master data visualization integrity through engaging gameplay!</p>
             </div>
         </div>
 
@@ -505,7 +567,7 @@
 
         <!-- Additional Info -->
         <div class="meme-box" style="margin-top: 4rem;">
-            <h2>🎮 How to Play</h2>
+            <h2>How to Play</h2>
             <ol style="text-align: left; max-width: 600px; margin: 1.5rem auto; line-height: 1.8;">
                 <li>Look at multiple charts on your screen</li>
                 <li>Find the ONE chart where visuals don't match the numbers</li>
@@ -515,20 +577,20 @@
             </ol>
             
             <p style="margin-top: 2rem;">
-                <strong>Pro Tip:</strong> The corrupted charts look professional but lie like a politician. 
-                Trust the numbers, not the bars! 🕵️‍♂️
+                <strong>Pro Tip:</strong> The corrupted charts appear professional but contain subtle visual deceptions. 
+                Always verify the numbers match the visuals!
             </p>
         </div>
 
         <!-- Final CTA -->
         <div style="text-align: center; margin: 5rem 0;">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Become a Chart Detective?</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-                Join thousands of players catching data crimes daily!
+            <h2 style="font-size: 2.8rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Master Data Visualization</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.8; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+                Join the community of players sharpening their analytical skills daily.
             </p>
             <div class="cta-buttons">
                 <a href="https://play.google.com/store/apps/details?id=com.confusb.chart.detective" class="btn btn-primary">
-                    <span>🚀</span> Download Now
+                    Start Playing
                 </a>
             </div>
         </div>
@@ -536,7 +598,7 @@
         <!-- Footer -->
         <div class="footer">
             <p style="margin-bottom: 1rem;">
-                Made with 📊 and 😂 by data visualization enthusiasts
+                Crafted for data visualization enthusiasts and accuracy advocates
             </p>
             <div>
                 <a href="private_policy.md">Privacy Policy</a>
@@ -548,7 +610,7 @@
 
     <!-- Easter Egg -->
     <div class="easter-egg" onclick="this.classList.toggle('rotate')">
-        🥚 GPT-5: 52.8% = 85% 
+        📊 52.8% ≠ 85% 
     </div>
 
     <script>
@@ -570,13 +632,13 @@
             });
         });
 
-        // Random chart crime messages
+        // Random chart error messages
         const crimeMessages = [
-            "CRIME! 🚨",
-            "BUSTED! 👮",
-            "GUILTY! ⚖️",
-            "CAUGHT! 🔍",
-            "FAKE! 🚫"
+            "ERROR",
+            "INVALID",
+            "MISMATCH",
+            "CORRUPTED",
+            "FAILED"
         ];
 
         document.querySelectorAll('.fake-chart.wrong').forEach(chart => {
